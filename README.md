@@ -1,6 +1,18 @@
 # Smile Care — Landing Page
 
-Pixel-matched build of the Smile Care design (1440px desktop frame) with GSAP motion.
+**Live site: [smilecare-pi.vercel.app](https://smilecare-pi.vercel.app)**
+
+Dental clinic website built from a Figma design: Next.js 16 frontend with GSAP motion,
+Django REST backend for testimonials, FAQs and appointment requests.
+
+![Smile Care hero](docs/hero.jpg)
+
+<details>
+<summary>Full page</summary>
+
+![Smile Care full page](docs/full-page.jpg)
+
+</details>
 
 - **frontend/** — Next.js 16 (App Router, TypeScript, Tailwind CSS v4, GSAP)
 - **backend/** — Django 6.1 + Django REST Framework
