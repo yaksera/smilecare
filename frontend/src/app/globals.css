@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist);
+
+  /* Palette sampled from the Smile Care design */
+  --color-ink: #111111;
+  --color-ink-soft: #1c1c1c;
+  --color-muted: #565656;
+  --color-silver: #c8c8c8;
+  --color-ivory: #f8f8f6;
+  --color-paper: #f9f9f8;
+  --color-mist: #efefef;
+  --color-bronze: #b39064;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-geist), system-ui, sans-serif;
+}
+
+/* Hairlines: #111 at 12% on light surfaces, ivory at 13% on dark ones */
+.line-light {
+  border-color: rgb(17 17 17 / 0.12);
+}
+.line-dark {
+  border-color: rgb(248 248 246 / 0.13);
+}
+
+/* Rolling text: the label slides up and an identical copy rolls in from below */
+.roll {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+}
+.roll > span {
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.roll > span + span {
+  position: absolute;
+  inset: 0;
+  transform: translateY(105%);
+}
+.group:hover .roll > span:first-child,
+.roll-trigger:hover > .roll > span:first-child {
+  transform: translateY(-105%);
+}
+.group:hover .roll > span + span,
+.roll-trigger:hover > .roll > span + span {
+  transform: translateY(0);
+}
+
+/* Site header switches to a solid bar once the hero has scrolled away (toggled by Motion.tsx) */
+[data-site-header] {
+  transition:
+    background-color 0.5s ease,
+    backdrop-filter 0.5s ease,
+    border-color 0.5s ease;
+}
+[data-site-header].is-solid {
+  background-color: rgb(17 17 17 / 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom-color: rgb(248 248 246 / 0.1);
+}
+
+/* Hide animated elements until GSAP reveals them (only when JS runs and motion is allowed) */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-hero],
+  html.js [data-hero-group] > *,
+  html.js [data-eyebrow],
+  html.js [data-split],
+  html.js [data-reveal],
+  html.js [data-stagger] > *,
+  html.js [data-clip] {
+    visibility: hidden;
+  }
+}
+
+/* Preloader and before/after veil only exist when GSAP is going to animate them away */
+[data-compare-cover] {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-preloader] {
+    display: flex;
+  }
+  html.js [data-compare-cover] {
+    display: block;
+  }
+}
+
+@keyframes ring {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-14deg);
+  }
+  40%,
+  80% {
+    transform: rotate(14deg);
+  }
+}
